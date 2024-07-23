@@ -145,3 +145,28 @@ function displayForecast() {
     }
   }
 }
+
+function addSearchHistory(city) {
+  const tempHistory = JSON.parse(localStorage.getItem("search-history")) || [];
+  const searchHistory = document.querySelector("#search");
+  const newSearch = document.createElement("div");
+  const newSearchTxt = document.createElement("p");
+  const fixedCity = city.replace("", "-");
+
+  if (searchHistoryList.includes(city)) {
+    return;
+  } else {
+    searchHistoryList.push(city);
+    searchHistory.appendChild(newSearch);
+    newSearch.appendChild(newSearchTxt);
+    newSearch.classList.add("search-history");
+    newSearchTxt.id = `${fixedCity}-history`;
+    newSearchTxt.textContent = city.toUpperCase();
+    addListenerForSearchHistory(newSearch);
+  }
+
+  if (!tempHistory.includes(city)) {
+    tempHistory.push(city);
+  }
+  localStorage.setItem("search-history", JSON.stringify(tempHistory));
+}
