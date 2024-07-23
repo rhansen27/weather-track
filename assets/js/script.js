@@ -96,4 +96,52 @@ function displayForecast() {
   city.classList.add("city-name");
   cityDate.classList.add("city-date");
   cityIcon.classList.add("city-icon");
+  cityWind.classList.add("temp");
+  cityHumidity.classList.add("temp");
+  cityDate.textContent = `(${dayjs(today.date).$M}/${dayjs(today.date).$D}/${
+    dayjs(today.date).$y
+  })`;
+  cityIcon.src = `https://openweathermap.org/img/wn/${
+    today.icon.replace("n", "d") || today.icon
+  }@2x.png`;
+  cityTemp.textContent = "Temp: " + today.temp;
+  cityWind.textContent = "Wind: " + today.wind;
+  cityHumidity.textContent = "Humidity: " + today.humidity;
+  city.textContent = cityInfo.name;
+
+  for (const info in cityInfo.forecast) {
+    for (const weather of cityInfo.forecast[info]) {
+      if (info == "day1") {
+      } else {
+        const infoPanel = document.createElement("div");
+        const date = document.createElement("h2");
+        const icon = document.createElement("img");
+        const temp = document.createElement("p");
+        const wind = document.createElement("p");
+        const humidity = document.createElement("p");
+
+        infoPanel.classList.add("forecast-container", "temp");
+        date.classList.add("forecast-header", "temp");
+        icon.classList.add("forecast-icon", "temp");
+        temp.classList.add("forecast-txt", "temp");
+        wind.classList.add("forecast-txt", "temp");
+        humidity.classList.add("forecast-txt", "temp");
+
+        forecastContainer.appendChild(infoPanel);
+        infoPanel.appendChild(date);
+        infoPanel.appendChild(icon);
+        infoPanel.appendChild(temp);
+        infoPanel.appendChild(wind);
+        infoPanel.appendChild(humidity);
+
+        date.textContent = `${dayjs(weather.date).$M}/${
+          dayjs(weather.date).$D
+        }/${dayjs(weather.date).$y}`;
+        icon.src = `https://openweathermap.org/img/wn/${weather.icon}@2x.png`;
+        temp.textContent = "Temp: " + weather.temp;
+        wind.textContent = "Wind: " + weather.wind;
+        humidity.textContent = "Humidity: " + weather.humidity;
+      }
+    }
+  }
 }
