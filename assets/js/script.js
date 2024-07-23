@@ -170,3 +170,26 @@ function addSearchHistory(city) {
   }
   localStorage.setItem("search-history", JSON.stringify(tempHistory));
 }
+
+function renderSearchHistory() {
+  const tempHistory = JSON.parse(localStorage.getItem("search-history")) || [];
+
+  for (const history in tempHistory) {
+    addSearchHistory(tempHistory[history]);
+  }
+}
+
+function addListenerForSearchHistory(btn) {
+  btn.addEventListener("click", function (e) {
+    const city = document.querySelector("input").value;
+
+    if (city === "") {
+      alert("Please enter a city");
+    } else {
+      e.preventDefault();
+      fetchCityInfo(city);
+      addSearchHistory(city);
+      document.querySelector("input").value = "";
+    }
+  });
+}
