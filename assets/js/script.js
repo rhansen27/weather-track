@@ -65,3 +65,23 @@ async function fetchWeatherInfo(lat, lon) {
     throw new Error("error");
   }
 }
+
+function displayForecast() {
+  const today = cityInfo.forecast.day1[0];
+  const forecastContainer = document.querySelector("#forecast-display");
+  const currentDayDisplay = document.querySelector("#info-display");
+
+  const cityInfoDiv = document.createElement("div");
+  const city = document.createElement("h2");
+  const cityDate = document.createElement("h2");
+  const cityIcon = document.createElement("img");
+
+  const cityTemp = document.createElement("p");
+  const cityWind = document.createElement("p");
+  const cityHumidity = document.createElement("p");
+
+  currentDayDisplay.appendChild(cityInfoDiv);
+  cityInfoDiv.appendChild(city);
+  cityInfoDiv.appendChild(cityDate);
+  cityInfoDiv.appendChild(cityIcon);
+}
