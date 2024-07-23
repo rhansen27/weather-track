@@ -84,4 +84,16 @@ function displayForecast() {
   cityInfoDiv.appendChild(city);
   cityInfoDiv.appendChild(cityDate);
   cityInfoDiv.appendChild(cityIcon);
+
+  currentDayDisplay.appendChild(cityTemp);
+  currentDayDisplay.appendChild(cityWind);
+  currentDayDisplay.appendChild(cityHumidity);
+
+  cityInfoDiv.classList.add("flex-container", "temp");
+  city.classList.add("temp");
+  cityDate.classList.add("temp");
+  cityIcon.classList.add("temp");
+  city.classList.add("city-name");
+  cityDate.classList.add("city-date");
+  cityIcon.classList.add("city-icon");
 }
