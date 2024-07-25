@@ -1,0 +1,40 @@
+::placeholder {
+  margin-left: 10px;
+  color: black;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to top right, blue, rbg(79, 2, 107));
+  font-weight: bold;
+  color: white;
+  font-size: 36px;
+}
+
+h1 {
+  font-size: larger;
+}
+#container {
+  height: inherit;
+  display: flex;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
