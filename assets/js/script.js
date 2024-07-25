@@ -206,3 +206,14 @@ btn.addEventListener("click", function (e) {
     document.querySelector("input").value = "";
   }
 });
+
+function clearDisplay() {
+  const items = document.querySelectorAll(".temp");
+
+  for (const item of items) {
+    item.remove();
+  }
+}
+
+fetchCityInfo(storedHistory[0] || "milwaukee");
+renderSearchHistory();
