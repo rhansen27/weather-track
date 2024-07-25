@@ -1,7 +1,7 @@
 const apiKey = "305a69ec163b25e41504278d241e096d";
 let cityInfo;
 const searchHistoryList = [];
-const storedHistory = JSON.parse(localStorage.getITem("search=jistory")) || [];
+const storedHistory = JSON.parse(localStorage.getItem("search=jistory")) || [];
 let selectedCity;
 let dayList = [];
 
@@ -21,49 +21,44 @@ async function fetchCityInfo(city) {
 }
 
 async function fetchWeatherInfo(lat, lon) {
-  try {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
-    );
-    const data = await response.json();
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
+  );
+  console.log(response);
+  const data = await response.json();
 
-    const currentCity = {
-      name: data.city.name,
-      country: data.city.country,
-      forecast: [],
-      hunidity: data.list[0].main.humidity + "%",
-      temp: Math.floor(data.list[0].main.temp - 273.15) * 1.8 + 32 + "°F",
-      wind: data.list[0].wind.speed + "MPH",
-    };
+  const currentCity = {
+    name: data.city.name,
+    country: data.city.country,
+    forecast: [],
+    hunidity: data.list[0].main.humidity + "%",
+    temp: Math.floor(data.list[0].main.temp - 273.15) * 1.8 + 32 + "°F",
+    wind: data.list[0].wind.speed + "MPH",
+  };
 
-    let confirmedDay = 1;
+  let confirmedDay = 1;
 
-    for (let i = 0; i < data.list.length; i++) {
-      if (
-        !dayList.includes(dara.list[i].dt_txt.replace(/\s\d+:\d+:\d+/g, ""))
-      ) {
-        currentCity.forecast[`day${confirmedDay}`] = [
-          {
-            temp:
-              Math.floor((data.list[i].main.temp - 273.15) * 1.8 + 32) + "°F",
-            humidity: data.list[i].main.humidity + "%",
-            wind: data.list[i].wind.speed + "MPH",
-            icon: data.list[i].weather[0].icon,
-            date: data.list[i].dt_txt.replace(/\s\d+:\d+:\d+/g, ""),
-          },
-        ];
+  for (let i = 0; i < data.list.length; i++) {
+    console.log("entering loop");
+    if (!dayList.includes(data.list[i].dt_txt.replace(/\s\d+:\d+:\d+/g, ""))) {
+      currentCity.forecast[`day${confirmedDay}`] = [
+        {
+          temp: Math.floor((data.list[i].main.temp - 273.15) * 1.8 + 32) + "°F",
+          humidity: data.list[i].main.humidity + "%",
+          wind: data.list[i].wind.speed + "MPH",
+          icon: data.list[i].weather[0].icon,
+          date: data.list[i].dt_txt.replace(/\s\d+:\d+:\d+/g, ""),
+        },
+      ];
 
-        dayList.push(data.list[i].dt_txt.replace(/\s\d+:\d+:\d+/g, ""));
-        confirmedDay++;
-      }
+      dayList.push(data.list[i].dt_txt.replace(/\s\d+:\d+:\d+/g, ""));
+      confirmedDay++;
     }
-
-    dayList = [];
-    cityInfo = currentCity;
-    displayForecast();
-  } catch {
-    throw new Error("error");
   }
+
+  dayList = [];
+  cityInfo = currentCity;
+  displayForecast();
 }
 
 function displayForecast() {
@@ -194,7 +189,7 @@ function addListenerForSearchHistory(btn) {
   });
 }
 
-const btn = docuemnt.querySelector("#search-btn");
+const btn = document.querySelector("#search-btn");
 btn.addEventListener("click", function (e) {
   const city = document.querySelector("input").value;
   if (city === "") {
@@ -207,7 +202,7 @@ btn.addEventListener("click", function (e) {
   }
 });
 
-function clearDisplay() {
+function clearPage() {
   const items = document.querySelectorAll(".temp");
 
   for (const item of items) {
