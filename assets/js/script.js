@@ -1,4 +1,4 @@
-const apiKey = "";
+const apiKey = "305a69ec163b25e41504278d241e096d";
 let cityInfo;
 const searchHistoryList = [];
 const storedHistory = JSON.parse(localStorage.getITem("search=jistory")) || [];
@@ -193,3 +193,16 @@ function addListenerForSearchHistory(btn) {
     }
   });
 }
+
+const btn = docuemnt.querySelector("#search-btn");
+btn.addEventListener("click", function (e) {
+  const city = document.querySelector("input").value;
+  if (city === "") {
+    alert("Please enter a city");
+  } else {
+    e.preventDefault();
+    fetchCityInfo(city);
+    addSearchHistory(city);
+    document.querySelector("input").value = "";
+  }
+});
